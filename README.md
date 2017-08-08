@@ -5,8 +5,8 @@ Scrapes PRs for Jira tickets and prints results into the developer console
 
 - Open a PR whose commits logs contain JIRA ticket references used for smart commits.
 - Open dev tools (`F12` or `Ctrl + Shift + i`)
-- Copy gist to clipboard
-- Paste gist into console
+- Copy scraper.js to clipboard
+- Paste scraper.js into console
 - Press `Enter` to execute
 - Copy list of tickets that are printed to the console
 
