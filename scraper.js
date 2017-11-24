@@ -1,42 +1,44 @@
 /* jshint esversion:6*/
 
 class Scraper {
-    constructor(keys) {
-        this.count = 0;
-        this.output = '\n\n';
-        this.keys = keys;
-    }
-    
-    scrape() {
-        keys.forEach(key => this.logTickets(key));
-    }
+  constructor(keys) {
+    this.count = 0;
+    this.output = '';
+    this.keys = keys;
+  }
 
-    // removes duplicate entries from array
-    removeDuplicates(arr) {
-        let s = new Set(arr);
-        let it = s.values();
-        return Array.from(it);
-    }
+  scrape() {
+    keys.forEach(key => this.logTickets(key));
+  }
 
-    logTickets(key) {
-        var regex = new RegExp(`${key}(.{5})`, 'g', 'i');
+  // removes duplicate entries from array
+  removeDuplicates(arr) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
+  }
 
-        // find all JIRA tickets in page
-        var found = document.body.innerText.match(regex);
-        var cleaned = this.removeDuplicates(found);
-        if (cleaned.length === 0) return;
-        this.count += cleaned.length;
-        // convert to string
-        var joined = cleaned.join('\n');
+  logTickets(key) {
+    var regex = new RegExp(`${key}(.{5})`, 'g', 'i');
 
-        // format for output
-        this.output += `${joined}\n`;
-    }
+    // find all JIRA tickets in page
+    var found = document.body.innerText.match(regex);
+    var cleaned = this.removeDuplicates(found);
+    if (cleaned.length === 0) return;
+    this.count += cleaned.length;
+    // convert to string
+    var joined = cleaned.join('\n');
 
-    print() {
-        // print to console
-        console.log(`${this.output}\n\nCount: ${this.count}\n\n`);
-    }
+    // format for output
+    this.output += `${joined}\n`;
+  }
+
+  print() {
+    const header = `\n\n\n${this.count} Jira Issues Found\t\n\n`;
+    const footer = `\n\nScraped @ ${new Date().toISOString()}\n\n`;
+    // print to console
+    console.log(`%c${header}${this.output}${footer}`, 'color: #bada55');
+  }
 }
 
 // JIRA project keys (ignore case not working as well as I had hoped.. probably using it incorrectly ¯\_(ツ)_/¯ )
