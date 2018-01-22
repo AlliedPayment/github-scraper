@@ -33,7 +33,7 @@ class Scraper {
     // find all JIRA tickets in page
     var found = document.body.innerText.match(regex);
     var cleaned = this.removeDuplicates(found);
-    cleaned = cleaned.map(removeCharacters);
+    cleaned = cleaned.map(this.removeCharacters);
     if (cleaned.length === 0) return;
     this.count += cleaned.length;
     // convert to string
