@@ -19,7 +19,7 @@ class Scraper {
   }
 
   logTickets(key) {
-    var regex = new RegExp(`${key}(.{5})`, 'g', 'i');
+    var regex = new RegExp(`${key}(.{6})`, 'g', 'i');
 
     // find all JIRA tickets in page
     var found = document.body.innerText.match(regex);
