@@ -18,12 +18,22 @@ class Scraper {
     return Array.from(it);
   }
 
+  removeCharacters(item) {
+    item = item.replace("'", '');
+    item = item.replace(',', '');
+    item = item.replace('\n', '');
+    item = item.replace('\t', '');
+    item = item.replace(' ', '');
+    return item;
+  }
+
   logTickets(key) {
     var regex = new RegExp(`${key}(.{6})`, 'g', 'i');
 
     // find all JIRA tickets in page
     var found = document.body.innerText.match(regex);
     var cleaned = this.removeDuplicates(found);
+    cleaned = cleaned.map(removeCharacters);
     if (cleaned.length === 0) return;
     this.count += cleaned.length;
     // convert to string
