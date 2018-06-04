@@ -12,6 +12,7 @@ Scrapes PRs for Jira tickets and prints results into the developer console
 - Press `Enter` to execute
 - Copy list of tickets that are printed to the console
 
-*** NOTE: CHROME ONLY ***
+***NOTE: CHROME ONLY***
+
 if you want to save console output to file
 `right click` in console and `Save As`
