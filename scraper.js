@@ -5,6 +5,7 @@ class Scraper {
     this.count = 0;
     this.output = '';
     this.keys = keys;
+    this.newline = '\r\n';
   }
 
   scrape() {
@@ -23,13 +24,13 @@ class Scraper {
     item = item.replace(',', '');
     item = item.replace('\n', '');
     item = item.replace('\t', '');
+    item = item.replace('\r', '');
     item = item.replace(' ', '');
     return item;
   }
 
   logTickets(key) {
     var regex = new RegExp(`${key}(.{6})`, 'g', 'i');
-
     // find all JIRA tickets in page
     var found = document.body.innerText.match(regex);
     var cleaned = this.removeDuplicates(found);
@@ -37,15 +38,19 @@ class Scraper {
     if (cleaned.length === 0) return;
     this.count += cleaned.length;
     // convert to string
-    var joined = cleaned.join('\n');
+    var joined = cleaned.join(this.newline);
 
     // format for output
-    this.output += `${joined}\n`;
+    this.output += `${joined}${this.newline}`;
   }
 
   print() {
-    const header = `\n\n\n${this.count} Jira Issues Found\t\n\n`;
-    const footer = `\n\nScraped @ ${new Date().toISOString()}\n\n`;
+    const header = `${this.newline}${this.newline}${
+      this.count
+    } Jira Issues Found\t${this.newline}${this.newline}`;
+    const footer = `${this.newline}Scraped @ ${new Date().toISOString()}${
+      this.newline
+    }`;
     // print to console
     console.log(`%c${header}${this.output}${footer}`, 'color: #bada55');
   }
