@@ -17,7 +17,7 @@ Scrapes PRs for Jira tickets and prints results into the developer console
 if you want to save console output to file
 `right click` in console and `Save As`
 
-### Usage
+### Usages
 
 #### Basic Usage
 ***Scrapes the DOM for keys***
