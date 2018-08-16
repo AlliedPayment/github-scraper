@@ -1,5 +1,3 @@
-/* jshint esversion:6*/
-
 class Scraper {
   constructor(keys) {
     this.count = 0;
@@ -8,8 +6,9 @@ class Scraper {
     this.newline = '\r\n';
   }
 
-  scrape() {
-    keys.forEach(key => this.logTickets(key));
+  scrape(source) {
+    source = source ? source : document.body.innerText;
+    keys.forEach(key => this.logTickets(key, source));
   }
 
   // removes duplicate entries from array
@@ -29,10 +28,10 @@ class Scraper {
     return item;
   }
 
-  logTickets(key) {
+  logTickets(key, source) {
     var regex = new RegExp(`${key}(.{6})`, 'g', 'i');
     // find all JIRA tickets in page
-    var found = document.body.innerText.match(regex);
+    var found = source.match(regex);
     var cleaned = this.removeDuplicates(found);
     cleaned = cleaned.map(this.removeCharacters);
     if (cleaned.length === 0) return;
