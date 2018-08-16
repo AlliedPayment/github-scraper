@@ -16,3 +16,26 @@ Scrapes PRs for Jira tickets and prints results into the developer console
 
 if you want to save console output to file
 `right click` in console and `Save As`
+
+### Usage
+
+#### Basic Usage
+***Scrapes the DOM for keys***
+``` js
+var keys = ['abp', 'ABP', 'Abp', 'aBp', 'aBP', 'ABp'];
+var scaper = new Scraper(keys);
+scaper.scrape();
+scaper.print();
+```
+
+#### AdHoc Usage
+***Scrapes the provided input***
+``` js
+var toBeScraped = 'Some string that may contain JIRA tickets like ABP-1234 or ABP-3210'
+var keys = ['abp', 'ABP', 'Abp', 'aBp', 'aBP', 'ABp'];
+var scaper = new Scraper(keys);
+scaper.scrape(toBeScraped);
+scaper.print();
+
+// will print ABP-1234 && ABP-3210 to the console
+```
